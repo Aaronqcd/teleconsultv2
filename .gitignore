@@ -1,0 +1,6 @@
+/logs
+.idea/
+*.class
+*.iml
+auth/
+target/

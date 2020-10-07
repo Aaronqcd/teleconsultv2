@@ -1,0 +1,113 @@
+.meeting-tool-borad>div{width:calc(33% - 4px);height:50px;margin:4px 4px 0 0;float:left;background-image:url(../images/board/first-level/polygon.png);background-repeat:no-repeat;background-position:calc(100% - 5px) calc(100% - 5px);cursor:pointer}
+.meeting-tool-borad>div dl dd{color:#FFF;text-align:center;margin:2px 0 0 0}
+.meeting-tool-borad>div ul{width:100%;position:relative;}
+.meeting-tool-borad>div ul li{border-top:1px solid #fff;text-align:center;color:#fff;line-height:35px;cursor:pointer}
+.meeting-tool-borad>div ul li img{margin-right:13px;margin-bottom:3px}
+.clear{clear:both;height:0;overflow:hidden}
+.blue,.blue li{background-color:#27A9E7}
+.green,.green li{background-color:#29B578}
+.orange,.orange li{background-color:#FFB748}
+.meeting-tool-borad .orange ul li img{margin-right:5px}
+.meeting-tool-borad .orange ul li{line-height:22px}
+.meeting-tool-borad .orange ul li.sk{line-height:35px;width:210px;text-align:left; padding-left:6px;}
+.meeting-tool-borad .orange.kk ul li{line-height:35px}
+.meeting-tool-borad .cxcolor{height:32px;}
+.input_cxcolor{width:30px;height:14px;padding:0;border:1px solid #DCDCDC;background:url(../images/board/second-level/setting/color.png) center right no-repeat;font-size:0;line-height:0;vertical-align:middle;cursor:pointer;border-radius:4px}
+.meeting-tool-borad .setcolor ul li{line-height:22px}
+.meeting-tool-borad .textop ul li{line-height:25px}
+.choiceline{margin-top:-5px;}
+.choiceline span>input{display:none}
+.choiceline span>label{position:relative}
+.ss label::before{display:inline-block;content:"";width:4px;height:4px;border-radius:50%;background-color:#FFF;margin-right:6px;vertical-align:bottom}
+.dd label::before{display:inline-block;content:"";width:6px;height:6px;border-radius:50%;background-color:#FFF;margin-right:6px;vertical-align:bottom}
+.bb label::before{display:inline-block;content:"";width:8px;height:8px;border-radius:50%;background-color:#FFF;margin-right:6px;vertical-align:bottom}
+.choiceline input:checked+label::before{background-color:#ef4238}
+
+.font {
+    width: 121px;
+    height: 24px;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    margin-top: 3px;
+    margin-left: 4px;
+    border-radius:3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius :3px;
+}
+
+/*为下拉小箭头留出一点位置，避免被文字覆盖*/
+.set{background:url(../images/board/second-level/text/textIn.png) center right no-repeat scroll transparent}
+.font .new{width:121px;border:1px solid #CCC;}
+.font select{
+    line-height:22px;
+    /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+    border: solid 1px #000; /*很关键：将默认的select选择框样式清除*/
+    appearance: none;
+    -moz-appearance: none;
+    border-radius:3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius :3px;
+    -webkit-appearance: none; /*在选择框的最右侧中间显示小箭头图片*/
+}
+/*清除ie的默认选择框样式清除，隐藏下拉箭头*/
+select::-ms-expand {
+    display: none;
+}
+.son{display:none}
+.son, .son{
+    margin-top: -12px;
+}
+.meeting-tool-borad>div ul li:hover{background-color:#333}
+.graffiti-li>ul{width:190px;}
+.boardPage{position: absolute;right: 65px;bottom: -2px}
+.boardPage>p {font-size: 16px;line-height: 35px;align-content: center;vertical-align: bottom; }
+
+.select-file {
+    display: inline-block;
+    width: 100%;
+    height: 30px;
+    position: relative;
+    vertical-align: middle;
+    padding: 0;
+    overflow: hidden;
+    background-color: #fff;
+    color: #555;
+    border: 1px solid #aaa;
+    text-shadow: none;
+    border-radius: 4px;
+    transition: box-shadow 0.25s ease;
+    z-index: 2;
+}
+
+.select-file:hover {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.select-file:before {
+    width: 10px;
+    height: 10px;
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-top-color: #fff;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    z-index: -2;
+}
+.select-file select {
+    cursor: pointer;
+    padding: 5px;
+    width: 100%;
+    border: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.select-file select:focus {
+    outline: none;
+}

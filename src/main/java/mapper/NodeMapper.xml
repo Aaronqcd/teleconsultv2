@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.va.removeconsult.dao.NodeDao">
+	<resultMap id="BaseResultMap" type="com.va.removeconsult.clouddisk.model.Node">
+		<result column="file_id" jdbcType="VARCHAR" property="fileId" />
+		<result column="file_name" jdbcType="VARCHAR" property="fileName" />
+		<result column="file_size" jdbcType="VARCHAR" property="fileSize" />
+		<result column="file_parent_folder" jdbcType="VARCHAR"
+			property="fileParentFolder" />
+		<result column="file_creation_date" jdbcType="VARCHAR"
+			property="fileCreationDate" />
+		<result column="file_creator" jdbcType="VARCHAR" property="fileCreator" />
+		<result column="file_path" jdbcType="VARCHAR" property="filePath" />
+		<result column="file_user_id" jdbcType="INTEGER" property="fileUserId" />
+	</resultMap>
+
+	<select id="queryByParentFolderId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		SELECT * FROM disk_file WHERE file_parent_folder =
+		#{pfid,jdbcType=VARCHAR}
+	</select>
+
+	<insert id="insert" parameterType="com.va.removeconsult.clouddisk.model.Node">
+		INSERT INTO disk_file
+		VALUES(#{fileId,jdbcType=VARCHAR},#{fileName,jdbcType=VARCHAR},#{fileUserId},#{fileSize,jdbcType=VARCHAR},#{fileParentFolder,jdbcType=VARCHAR},#{fileCreationDate,jdbcType=VARCHAR},#{fileCreator,jdbcType=VARCHAR},#{filePath,jdbcType=VARCHAR},#{fileSourceMeeting,jdbcType=VARCHAR})
+	</insert>
+
+	<update id="update" parameterType="com.va.removeconsult.clouddisk.model.Node">
+		UPDATE disk_file SET file_name =
+		#{fileName,jdbcType=VARCHAR},file_size =
+		#{fileSize,jdbcType=VARCHAR},file_parent_folder =
+		#{fileParentFolder,jdbcType=VARCHAR},file_creation_date =
+		#{fileCreationDate,jdbcType=VARCHAR},file_creator =
+		#{fileCreator,jdbcType=VARCHAR},file_path =
+		#{filePath,jdbcType=VARCHAR} WHERE file_id =
+		#{fileId,jdbcType=VARCHAR}
+	</update>
+
+	<delete id="deleteByParentFolderId" parameterType="java.lang.String">
+		DELETE FROM
+		disk_file WHERE file_parent_folder = #{pfid,jdbcType=VARCHAR}
+	</delete>
+	
+	<delete id="deleteByParentSourceMeeting" parameterType="java.lang.String">
+		DELETE FROM
+		disk_file WHERE file_source_meeting = #{pfid,jdbcType=VARCHAR}
+	</delete>
+	
+
+	<delete id="deleteById" parameterType="java.lang.String">
+		DELETE FROM disk_file WHERE
+		file_id = #{fileId,jdbcType=VARCHAR}
+	</delete>
+
+	<select id="queryById" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		SELECT * FROM disk_file WHERE file_id =
+		#{fileId,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="queryByUserId" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		SELECT * FROM disk_file WHERE 1=1 
+		<if test="fileId != null and fileId != '' ">
+		 	AND file_id = #{fileId,jdbcType=VARCHAR}
+		 </if>
+		 <if test="userId != null">
+		 	AND file_user_id = #{userId}
+		 </if>
+		
+	</select>
+
+	<update id="updateFileNameById" parameterType="java.util.Map">
+		UPDATE disk_file SET
+		file_name = #{newFileName,jdbcType=VARCHAR} WHERE file_id =
+		#{fileId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="queryAll" resultMap="BaseResultMap">
+		SELECT * FROM disk_file
+		
+	</select>
+
+	<select id="queryByPath" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		SELECT * FROM disk_file WHERE file_path =
+		#{path,jdbcType=VARCHAR}
+	</select>
+
+	<select id="queryBySomeFolder" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		SELECT * FROM disk_file WHERE file_parent_folder in (SELECT
+		file_parent_folder
+		FROM disk_file WHERE file_id =
+		#{fileId,jdbcType=VARCHAR})
+	</select>
+
+	<update id="moveById" parameterType="java.util.Map">
+		UPDATE disk_file SET
+		file_parent_folder = #{locationpath,jdbcType=VARCHAR} WHERE file_id =
+		#{fileId,jdbcType=VARCHAR}
+	</update>
+
+</mapper>

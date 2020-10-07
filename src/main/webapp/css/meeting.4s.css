@@ -1,0 +1,93 @@
+.rpt-page {
+	margin: 15px 15px 50px 15px;
+}
+
+.rpt-title {
+	text-align: center;
+	font-family: "黑体","宋体";
+	font-size: 24px;
+	font-weight: bold;
+	margin: 10px;
+}
+
+.rpt-title2 {
+	text-align: center;
+	font-size: 16px;
+	font-weight: bold;
+	margin: 10px;
+}
+
+.rpt-line {
+	border: solid 1px black;
+	margin: 5px 0px;
+}
+
+.rpt-content {
+	padding: 0px 20px;
+}
+
+.rpt-table, .rpt-data-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.rpt-table td, .rpt-data-table td {
+	text-align: left;
+	padding: 3px;
+}
+
+.rpt-section {
+	margin: 20px 0px;
+}
+
+.rpt-sec-title {
+	font-weight: bold;
+}
+
+.rpt-sec-body {
+	margin: 10px 30px;
+}
+
+.rpt-data-table th, .rpt-data-table td {
+	border: solid 1px #ccc;
+	padding: 8px 15px;
+}
+
+.rpt-data-table thead th {
+	padding: 15px 5px;
+	text-align: center;
+}
+
+.rpt-data-table tfoot th {
+	padding: 5px;
+}
+
+.rpt-label {
+	display: inline-block;
+	margin-right: 5px;
+}
+
+.rpt-gly, .rpt-gly li {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.rpt-gly {
+	margin: 10px;
+	text-align: center;
+}
+
+.rpt-gly li {
+	display: inline-block;
+	margin: 5px;
+}
+
+.rpt-gly li img {
+	width: 250px;
+	height: 250px;
+}
+
+.rpt-rcol {
+	width: 180px;
+}

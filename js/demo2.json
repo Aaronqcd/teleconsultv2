@@ -1,0 +1,45 @@
+{
+  "code": 0
+  ,"msg": ""
+  ,"count": 3
+  ,"data": [{
+    "id": "10001"
+    ,"encode": "M201801150001"
+    ,"account": "abd01"
+    ,"username": "杜甫"
+    ,"title": "儿科会诊"
+    ,"time": "2018-01-15 13:00~15:00"
+    ,"record": "http://domian.com/南山医院"
+    ,"note": "与会方：缺席方：时间：会议内容："
+    ,"status": "1"
+    ,"type":"1"
+    ,"members":"张医生，李医生，王医生"
+  },
+  {
+    "id": "10002"
+    ,"encode": "M201801150002"
+    ,"account": "abd01"
+    ,"username": "杜甫"
+    ,"title": "儿科会诊"
+    ,"time": "2018-01-15 13:00~15:00"
+    ,"record": "http://domian.com/南山医院"
+    ,"note": "与会方：缺席方：时间：会议内容："
+    ,"status": "2"
+    ,"type":"2"
+    ,"members":"张医生，李医生，王医生"
+  },
+  {
+    "id": "10003"
+    ,"encode": "M201801150003"
+    ,"account": "abd01"
+    ,"username": "杜甫"
+    ,"title": "儿科会诊"
+    ,"time": "2018-01-15 13:00~15:00"
+    ,"record": "http://domian.com/南山医院"
+    ,"note": "与会方：缺席方：时间：会议内容："
+    ,"status": "3"
+    ,"type":"1"
+    ,"members":"张医生，李医生，王医生"
+  }
+]
+}  

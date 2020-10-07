@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.va.removeconsult.dao.FolderDao">
+	<resultMap id="BaseResultMap" type="com.va.removeconsult.clouddisk.model.Folder">
+		<result column="folder_id" jdbcType="VARCHAR" property="folderId" />
+		<result column="folder_name" jdbcType="VARCHAR" property="folderName" />
+		<result column="folder_creation_date" jdbcType="VARCHAR"
+			property="folderCreationDate" />
+		<result column="folder_creator" jdbcType="VARCHAR" property="folderCreator" />
+		<result column="folder_parent" jdbcType="VARCHAR" property="folderParent" />
+		<result column="folder_constraint" jdbcType="INTEGER" property="folderConstraint" />
+		<result column="folder_user_id" jdbcType="INTEGER" property="folderUserId" />
+		<result column="folder_size" jdbcType="BIGINT" property="folderSize" />
+	</resultMap>
+	
+	<resultMap id="SysConfMap" type="com.va.removeconsult.pojo.SysConf">
+		<result column="id" jdbcType="BIGINT" property="id" />
+		<result column="conf_key" jdbcType="VARCHAR" property="confKey" />
+		<result column="conf_value" jdbcType="VARCHAR" property="confValue" />		
+		<result column="remark" jdbcType="VARCHAR" property="remark" />		
+	</resultMap>
+
+	<select id="queryById" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		SELECT * FROM disk_folder WHERE folder_id = #{fid,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="queryByUserId"  parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		SELECT * FROM disk_folder WHERE 1=1 
+		 <if test="fid != null and fid != '' ">
+		 	AND folder_id = #{fid,jdbcType=VARCHAR}
+		 </if>
+		 <if test="userId != null">
+		 	AND folder_user_id = #{userId}
+		 </if>
+	</select>
+	
+	<select id="queryByNameAndUser"  parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		SELECT * FROM disk_folder WHERE 1=1 
+		 <if test="fname != null and fname != '' ">
+		 	AND folder_name = #{fname,jdbcType=VARCHAR}
+		 </if>
+		 <if test="userId != null">
+		 	AND folder_user_id = #{userId}
+		 </if>
+	</select>
+	
+	<select id="queryRootByUserId"  parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		SELECT * FROM disk_folder WHERE folder_user_id = #{userId} and folder_parent = 'null'
+	</select>
+	
+	<select id="queryOverdueFolder"  parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT t.* FROM disk_folder t LEFT JOIN disk_folder k on t.folder_parent = k.folder_id WHERE  k.folder_parent = 'null' 
+	</select>
+	
+
+	<select id="queryByParentId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		SELECT * FROM disk_folder WHERE folder_parent = #{pid,jdbcType=VARCHAR}
+	</select>
+
+	<select id="queryByParentIdAndFolderName" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		SELECT * FROM disk_folder WHERE folder_parent = #{parentId,jdbcType=VARCHAR} AND
+		folder_name = #{folderName,jdbcType=VARCHAR}
+	</select>
+
+	<insert id="insertNewFolder" parameterType="com.va.removeconsult.clouddisk.model.Folder">
+		INSERT INTO disk_folder
+		VALUES(#{folderId,jdbcType=VARCHAR},
+		#{folderName,jdbcType=VARCHAR},
+		#{folderUserId},
+		#{folderCreationDate,jdbcType=VARCHAR},
+		#{folderCreator,jdbcType=VARCHAR},
+		#{folderParent,jdbcType=VARCHAR},
+		#{folderConstraint,jdbcType=INTEGER},
+		#{folderSize});
+	</insert>
+
+	<delete id="deleteById" parameterType="java.lang.String">
+		DELETE FROM disk_folder WHERE folder_id=#{folderId,jdbcType=VARCHAR}
+	</delete>
+
+	<update id="updateFolderNameById" parameterType="java.util.Map">
+		UPDATE disk_folder SET folder_name = #{newName,jdbcType=VARCHAR} WHERE folder_id
+		= #{folderId,jdbcType=VARCHAR}
+	</update>
+
+	<update id="updateFolderConstraintById" parameterType="java.util.Map">
+		UPDATE disk_folder SET folder_constraint = #{newConstraint,jdbcType=INTEGER} WHERE folder_id
+		= #{folderId,jdbcType=VARCHAR}
+	</update>
+	
+	<update id="moveById" parameterType="java.util.Map">
+		UPDATE disk_folder SET
+		folder_parent = #{locationpath,jdbcType=VARCHAR} WHERE folder_id =
+		#{folderId,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="querySysConf" parameterType="java.lang.String"
+		resultMap="SysConfMap">
+		SELECT * FROM sys_conf WHERE conf_key = #{confKey,jdbcType=VARCHAR}
+	</select>
+	
+	<update id="updateFolderSizeById" parameterType="java.util.Map">
+		UPDATE disk_folder SET folder_size = #{folderSize} WHERE folder_id = #{folderId,jdbcType=VARCHAR}
+	</update>
+
+</mapper>
