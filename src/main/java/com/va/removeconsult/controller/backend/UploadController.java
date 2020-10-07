@@ -74,6 +74,7 @@ public class UploadController {
     		@RequestParam(value = "type", required = true) int type,
     		@RequestParam(value = "source", required = false) String source,
             HttpServletRequest request,HttpServletResponse response) {
+		String result;
     	response.setContentType("text/html,charset=UTF-8");
     	response.setCharacterEncoding("utf-8");
     	try {
@@ -86,22 +87,22 @@ public class UploadController {
         FileEntity entity = new FileEntity();
         FileUploadTool fileUploadTool = new FileUploadTool();
         try {
+			String fileName = multipartFile.getOriginalFilename().toString();
+			String fileType = fileName.substring(fileName.lastIndexOf('.') + 1,fileName.length()).toLowerCase();
+			String lowerFileType = fileType.toLowerCase();
+			if(!"gif".equals(lowerFileType) && !"jpg".equals(lowerFileType) && !"jpeg".equals(lowerFileType) && !"png".equals(lowerFileType)
+					&& !"bmp".equals(lowerFileType)) {
+				json.put("code","302");
+				return json.toJSONString();
+			}
             entity = fileUploadTool.createFile(multipartFile, request,type);
             if (entity != null) {
-            	String fileName = multipartFile.getOriginalFilename().toString();
-				String fileType = fileName.substring(fileName.lastIndexOf('.') + 1,fileName.length()).toLowerCase();
 				/*
 				if(!"txt".equals(fileType) && !"doc".equals(fileType) && !"xls".equals(fileType)  && !"ppt".equals(fileType) && !"docx".equals(fileType) && !"xlsx".equals(fileType)
 						&& !"dcm".equals(fileType) && !"flv".equals(fileType) && !"rmvb".equals(fileType) && !"mp4".equals(fileType) && !"mvb".equals(fileType)) {
 					json.put("code","302");
 					return json.toJSONString();
 				}*/
-				
-				if("php".equals(fileType) || "asp".equals(fileType) || "jsp".equals(fileType)) {
-					json.put("code","302");
-					return json.toJSONString();
-				}	
-				
             	//service.saveFile(entity);
                 json.put("code", "1");
                 json.put("data", entity.getTitleAlter()+entity.getType());
@@ -127,7 +128,7 @@ public class UploadController {
         }
         
         System.out.println(entity);
-        String result = json.toJSONString();
+        result = json.toJSONString();
 		try {
 			//result = new String(result.getBytes("iso-8859-1"),"utf-8");
 			result=new String(result.getBytes("UTF-8"),"UTF-8");

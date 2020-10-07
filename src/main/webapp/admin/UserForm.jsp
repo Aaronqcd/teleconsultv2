@@ -233,6 +233,7 @@ layui.use(['form','upload'], function(){
    		enctype:"multipart/form-data"
     }
 	,
+    acceptMime: 'image/jpg, image/png, image/jpeg, image/bmp, image/gif',
 	data:{
 		type:'1'
 	}
