@@ -325,7 +325,7 @@ layui.use(['table','form', 'layer'], function(){
           layer.close(index);
       });
     }else if(obj.event === 'start'){
-        var url ="Meeting"+"?meetingId="+data.id+"&userid="+parent.window.userID+"&currentUser="+parent.window.user;
+        var url ="Meeting"+"?meetingId="+data.id+"&userid="+parent.window.userID;
         showVideoRateSelect(url)
     }else if(obj.event === 'check'){
     	$.get("currentMeeting",{meetingId:data.id},function(result){
@@ -333,7 +333,7 @@ layui.use(['table','form', 'layer'], function(){
             var meetingStatus = result.meetingInfo.status;
             //需要主持人先开房间
             if( (isPresenter== true) || (isPresenter== false && meetingStatus == 3)){
-                var url ="Meeting"+"?meetingId="+data.id+"&userid="+result['currentUser']['id']+"&currentUser="+result['currentUser']['user'];
+                var url ="Meeting"+"?meetingId="+data.id+"&userid="+result['currentUser']['id'];
                 showVideoRateSelect(url)
             }else{
                 layer.msg("需要主持人先发起会诊才能进入");

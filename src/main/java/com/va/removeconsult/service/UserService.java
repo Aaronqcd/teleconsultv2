@@ -1,10 +1,7 @@
 package com.va.removeconsult.service;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -132,7 +129,8 @@ public class UserService{
     }
     private void setUserToSession(HttpServletRequest request,Map<String,Object> user) {
     	List<Map<String,Object>> list = (List<Map<String,Object>>)request.getSession().getAttribute("user");
-    	if(list == null) {
+		List<Map<String,Object>> userList = new ArrayList<Map<String,Object>>();
+		if(list == null) {
     		list = new ArrayList<Map<String,Object>>();
     	}
     	for (Map<String, Object> map : list) {
@@ -142,8 +140,16 @@ public class UserService{
 			}
 		}
     	list.add(user);
+    	for(Map<String,Object> map : list) {
+			Map<String,Object> userMap = new HashMap<>();
+			userMap.put("id", map.get("id"));
+			userMap.put("user", map.get("user"));
+			userMap.put("avatar", map.get("avatar"));
+			userList.add(userMap);
+		}
     	//request.setAttribute("currentUser", user.get("user"));
     	request.getSession().setAttribute("user", list);
+		request.getSession().setAttribute("userInfo", userList);
     }
     
     public void Logout(HttpServletRequest request,HttpServletResponse response){

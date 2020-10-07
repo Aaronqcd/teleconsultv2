@@ -49,14 +49,13 @@
 </div>
 <script>
 document.getElementById('currentUser').value=getUrlParam("currentUser");
-var users = '<%=JSON.toJSON(session.getAttribute("user")).toString()%>';
+var users = '<%=JSON.toJSON(session.getAttribute("userInfo")).toString()%>';
 users = JSON.parse(users);
 var currentUser = getUrlParam("currentUser");
 var currentUserId = document.getElementById('currentUserId').value;
 for(var i=0;i<users.length;i++){
     if(users[i]["user"] == currentUser){
-        window.userID = users[i].id;  
-        window.user = users[i].user;
+        window.userID = users[i].id;
         break;
     };
 }
@@ -91,7 +90,7 @@ layui.use(['layer','element'], function(){
     });
   });
 
-  var users = '<%=JSON.toJSON(session.getAttribute("user")).toString()%>';
+  var users = '<%=JSON.toJSON(session.getAttribute("userInfo")).toString()%>';
   users = JSON.parse(users);
   var currentUser = $("#currentUser").val();
   var isLogin = false;

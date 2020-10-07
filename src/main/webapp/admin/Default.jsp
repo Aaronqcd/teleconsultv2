@@ -79,7 +79,7 @@ layui.use(['layer','element'], function(){
       }
     });
   });
-  var users = '<%=JSON.toJSON(session.getAttribute("user")).toString()%>';
+  var users = '<%=JSON.toJSON(session.getAttribute("userInfo")).toString()%>';
   users = JSON.parse(users);
   var currentUser = $("#currentUser").val();
   var isLogin = false;

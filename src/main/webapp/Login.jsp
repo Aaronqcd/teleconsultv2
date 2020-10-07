@@ -124,8 +124,6 @@ layui.use(['form'], function(){
                   // setCookie("password",result.password);
                   location.href="toDefault?currentUser="+result.user;
 
-              }else if(result.resType === "1"){
-                  layer.msg('后台用户不能登陆前台系统，用户名不存在！', {icon: 7});
               }else{
             	  layer.msg("用户名或密码错误",{time:3000});
             		setTimeout(toLogin,4000);
