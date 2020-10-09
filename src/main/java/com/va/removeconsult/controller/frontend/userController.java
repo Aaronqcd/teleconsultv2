@@ -250,7 +250,8 @@ public class userController {
 		Map<String, Object> pagination = new HashMap<String, Object>();
     	pagination.put("page", 1);
     	pagination.put("size", Integer.MAX_VALUE);
-		List<Map> meetings = db.getMeetings("meeting.id in("+ids+")", pagination);
+		String userId = user.get("id").toString();
+		List<Map> meetings = db.getMeetings("meeting.id in("+ids+") and find_in_set("+userId+",meeting.attends)", pagination);
 
 		//update by and
 		String log = "";
