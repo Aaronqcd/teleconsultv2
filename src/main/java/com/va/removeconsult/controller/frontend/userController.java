@@ -522,6 +522,8 @@ public class userController {
 		}
         if(boolType){
             if(ok){
+            	String codeStr = GenerateCodeUtil.generateCode();
+				request.getSession().setAttribute("CODE_TEST", codeStr);
                 Map login=userService.getLoginInfo(request);
                 db.addLog("登录", login);
                 Cookie cookie;
