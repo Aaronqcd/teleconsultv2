@@ -258,6 +258,9 @@ public class userController {
 		JSONObject data=new JSONObject();
 		int code = 0;
 		boolean flag =true;
+		if(meetings.size() == 0) {
+			flag = false;
+		}
 		for (Map map : meetings) {
 			int status = (int) map.get("status");
 			if( status != 3) {

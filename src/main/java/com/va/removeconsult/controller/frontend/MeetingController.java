@@ -937,13 +937,18 @@ public class MeetingController {
 		return json.toJSONString();
 	}
 
-	@RequestMapping(value = "/RenameRecordVideo", method = RequestMethod.POST)
+	@RequestMapping(value = "/RenameRecordVideo", method = RequestMethod.POST, produces = {"text/plain;charset=utf-8","text/html;charset=utf-8"})
 	@ResponseBody
 	public String renameRecordVideo(@RequestBody Map<String, Object> params) {
 		JSONObject json = new JSONObject();
 		try {
 			int id = (int) params.get("id");
 			String name = (String) params.get("name");
+			if(name.contains("<")) {
+				json.put("code", "1");
+				json.put("msg", "非法输入");
+				return json.toJSONString();
+			}
 			recordService.renameVideo(id, name);
 			json.put("code", "0");
 		} catch (Exception e) {
